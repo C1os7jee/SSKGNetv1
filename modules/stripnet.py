@@ -123,7 +123,7 @@ class OverlapPatchEmbed(nn.Module):
 
 
 class StripNet(nn.Module):
-    """原 Strip R-CNN 的 StripNet 主干，去除 MMRotate 依赖以便单独使用。"""
+    """原 Strip R-CNN 的 StripNet 主干，去除 MMRotate"""
 
     def __init__(
         self,

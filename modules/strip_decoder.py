@@ -122,7 +122,6 @@ class UpSampleConv(nn.Module):
 
 
 class StripDecoder(nn.Module):
-    """基于条状卷积的解码器，接口与 CKADecoder 保持一致。"""
 
     def __init__(self, dims, gcn_channels, num_blocks_per_stage=2, k2=15, use_dynamic=False, stage_k2s=None, use_low_gcn=True):
         super().__init__()

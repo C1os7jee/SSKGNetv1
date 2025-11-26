@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# 修复：重新加入被误删的类定义
+
 class ConvWeightAttention(nn.Module):
     def __init__(self, dims, kernel_size=7, attention_dim=64, num_heads=8):
         super().__init__()

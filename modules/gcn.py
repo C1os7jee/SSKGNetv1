@@ -6,9 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class GCN(nn.Module):
-    """
-    借鉴自HDPNet的GCN实现，适配动态节点数。
-    """
+
     def __init__(self, num_state, bias=False):
         super(GCN, self).__init__()
         self.conv1 = nn.Conv1d(num_state, num_state, kernel_size=1, bias=bias)
@@ -26,10 +24,7 @@ class GCN(nn.Module):
         return h
 
 class GCNBranch(nn.Module):
-    """
-    并行的GCN分支，用于提取图像的全局结构特征。
-    支持根据目标分辨率动态地产生同尺寸的GCN特征。
-    """
+
     def __init__(self, in_channels=3, out_channels=64, num_nodes=16):
         super(GCNBranch, self).__init__()
         self.num_nodes = num_nodes
