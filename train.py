@@ -309,6 +309,12 @@ def main():
         action="store_true",
         help="启用动态条状卷积核（默认关闭）",
     )
+    parser.add_argument(
+        "--cldice_weight",
+        type=float,
+        default=0.5,
+        help="clDice 损失权重，用于保持裂缝连通性",
+    )
     args = parser.parse_args()
 
     os.environ["GDR_BACKBONE"] = args.backbone
@@ -327,6 +333,7 @@ def main():
 
     model = GDRNet().to(device)
     base_stage_weights = [0.1, 0.2, 0.3, 0.4] if not args.final_only else [0.0, 0.0, 0.0, 1.0]
+
     loss_fn = ComprehensiveLoss(
         w_main=1.0,
         w_gdt1=0.2 if args.final_only else 0.3,
@@ -334,6 +341,7 @@ def main():
         w_dice=0.8,
         stage_weights=base_stage_weights if args.fixed_stage_weights else None,
         w_boundary=args.boundary_loss_weight,
+        w_cldice=args.cldice_weight, 
     )
     # 分层学习率：backbone 小，解码器/GCN 默认
     enc_params = list(model.encoder.parameters())
