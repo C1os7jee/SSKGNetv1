@@ -1,0 +1,60 @@
+# GDRNet CRACK500 训练配置文件
+
+# 数据配置
+data:
+  dataset_path: "/home/ubuntu/CJ-Seg/data/CRACK500_1"
+  image_size: 480
+  num_workers: 4
+  
+# 模型配置  
+model:
+  backbone: "pvt_v2_b2"  # 可选: pvt_v2_b2, swin_v1_l
+  gcn_channels: 64
+  pretrained: null  # 预训练模型路径（可选）
+
+# 训练配置
+training:
+  epochs: 200
+  batch_size: 4
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  save_interval: 20
+  early_stop_patience: 30
+  
+# 损失函数配置
+loss:
+  w_main: 1.0      # 主分割损失权重
+  w_gdt1: 0.5      # 梯度损失权重
+  w_gdt2: 0.5      # 拉普拉斯损失权重
+  w_dice: 0.8      # Dice损失权重
+
+# 数据增强配置
+augmentation:
+  random_flip: true
+  random_rotation: true
+  rotation_degrees: 10
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.1
+    hue: 0.05
+
+# 实验配置
+experiment:
+  name: "CRACK500_GDRNet"
+  checkpoint_dir: "checkpoints/CRACK500"
+  log_dir: "logs"
+  seed: 42
+
+# GPU配置
+gpu:
+  device_id: 7  # 使用的GPU ID
+  
+# 评估配置
+evaluation:
+  save_predictions: true
+  num_vis_samples: 20
+  vis_dir: "evaluation_results"
+
+
+

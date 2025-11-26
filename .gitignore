@@ -1,0 +1,18 @@
+# 忽略权重文件
+*.pth
+*.pt
+*.pkl
+*.onnx
+
+# 忽略数据集
+datasets/
+data/
+*.zip
+*.tar
+*.gz
+
+# 忽略 PyTorch 缓存和日志
+__pycache__/
+runs/
+*.log
+.ipynb_checkpoints/
